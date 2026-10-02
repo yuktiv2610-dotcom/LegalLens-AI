@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap');
+
+:root {
+  --bg-warm: #F0EBE1;
+  --bg-warm-dark: #E4DDD0;
+  --ink: #1A1612;
+  --ink-soft: #4D4234;
+  --accent-gold: #C4973B;
+  --accent-rust: #A0522D;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-warm);
+  color: var(--ink);
+  font-family: 'Crimson Text', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Elegant Scroll Reveal Animation (Apple-like) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+
+/* Refined Pixel Elements - Chic & Subtle */
+.pixel-border {
+  border: 1px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink-soft);
+}
+
+.pixel-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0 var(--ink-soft);
+}
+
+.pixel-btn:hover {
+  background: var(--ink);
+  color: var(--bg-warm);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--accent-gold);
+}
+
+.pixel-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--accent-gold);
+}
+
+/* Elegant Cards */
+.chic-card {
+  background: var(--bg-warm);
+  border: 1px solid var(--ink-soft);
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.chic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+
+.chic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(26, 22, 18, 0.1);
+  border-color: var(--ink);
+}
+
+.pixel-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  padding: 4px 8px;
+  border: 1px solid;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-warm-dark); }
+::-webkit-scrollbar-thumb { background: var(--ink-soft); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink); }
+
+/* Typography */
+.font-pixel { font-family: 'Press Start 2P', monospace; }
+.font-serif { font-family: 'Crimson Text', serif; }
+.font-mono { font-family: 'Courier New', monospace; }

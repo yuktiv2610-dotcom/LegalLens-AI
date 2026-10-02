@@ -1,0 +1,101 @@
+env_id: legallens-v2
+name: LegalLens 2.0
+version: "2.0.0"
+description: >
+  OpenEnv AI legal reasoning environment for Indian law.
+  An AI agent receives a realistic Indian legal case and must investigate
+  it through structured actions (classify domain, identify issues, identify laws,
+  check jurisdiction, request evidence, recommend actions, finalize analysis).
+  Rewards reflect legal reasoning quality. Scores normalized 0.0 - 1.0.
+
+tasks:
+  - id: cyber_fraud
+    name: Cyber Fraud Investigation
+    description: Online banking phishing and financial fraud case
+    domain: cyber_law
+    difficulty: 2
+    max_steps: 20
+
+  - id: bail
+    name: Bail Application & Criminal Procedure
+    description: Criminal arrest with incomplete facts — tests uncertainty recognition
+    domain: criminal_law
+    difficulty: 4
+    max_steps: 20
+
+  - id: consumer
+    name: Consumer Dispute - Defective Product
+    description: Warranty dispute and Consumer Protection Act complaint
+    domain: consumer_law
+    difficulty: 2
+    max_steps: 20
+
+  - id: property
+    name: Property Dispute - Title & Possession
+    description: Fraudulent double-sale of immovable property
+    domain: property_law
+    difficulty: 4
+    max_steps: 20
+
+action_space:
+  type: structured
+  actions:
+    - CLASSIFY_DOMAIN
+    - IDENTIFY_ISSUE
+    - IDENTIFY_LAW
+    - CHECK_JURISDICTION
+    - REQUEST_EVIDENCE
+    - ANALYZE_EVIDENCE
+    - RECOMMEND_ACTION
+    - ASK_CLARIFICATION
+    - FINALIZE_ANALYSIS
+
+observation_space:
+  type: dict
+  fields:
+    - case_id
+    - task_id
+    - facts
+    - legal_domain
+    - jurisdiction
+    - identified_issues
+    - identified_laws
+    - evidence
+    - recommended_actions
+    - missing_information
+    - last_action_result
+    - cumulative_reward
+    - step_count
+    - done
+
+reward:
+  min: -0.20
+  max: 0.20
+  per_step: true
+  normalized_episode_score:
+    min: 0.0
+    max: 1.0
+
+endpoints:
+  health: GET /health
+  reset: POST /reset
+  step: POST /step
+  state: GET /state
+
+server:
+  host: 0.0.0.0
+  port: 7860
+  module: server.app:app
+
+inference:
+  script: inference.py
+  env_vars:
+    - API_BASE_URL
+    - MODEL_NAME
+    - HF_TOKEN
+
+disclaimer: >
+  LegalLens is an AI-assisted informational tool.
+  It does not provide professional legal advice.
+  Verify applicable law and consult a qualified professional
+  for real-world legal decisions.
